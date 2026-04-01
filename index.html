@@ -17,7 +17,6 @@ body {
     flex-direction: column;
 }
 
-/* кнопка */
 button {
     padding: 15px 25px;
     font-size: 18px;
@@ -26,14 +25,8 @@ button {
     background: #ff4d6d;
     color: white;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-button:hover {
-    background: #ff1e4d;
-}
-
-/* поле ввода */
 input {
     padding: 10px;
     font-size: 16px;
@@ -43,11 +36,10 @@ input {
     text-align: center;
 }
 
-/* сердце */
 .heart {
     position: relative;
-    width: 220px;
-    height: 200px;
+    width: 260px;
+    height: 240px;
     background: red;
     transform: rotate(-45deg) scale(0);
     display: none;
@@ -57,14 +49,14 @@ input {
 .heart::after {
     content: "";
     position: absolute;
-    width: 220px;
-    height: 200px;
+    width: 260px;
+    height: 240px;
     background: red;
     border-radius: 50%;
 }
 
-.heart::before { top: -110px; }
-.heart::after { left: 110px; }
+.heart::before { top: -130px; }
+.heart::after { left: 130px; }
 
 .text {
     position: absolute;
@@ -72,12 +64,22 @@ input {
     text-align: center;
     transform: rotate(45deg);
     top: 70px;
+    left: 0;
     color: white;
-    font-size: 22px;
-    font-weight: bold;
 }
 
-/* анимации */
+.main-text {
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.sub-text {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
 .show {
     display: block;
     animation: appear 1.5s forwards, beat 1s 1.5s infinite;
@@ -92,7 +94,6 @@ input {
     50% { transform: rotate(-45deg) scale(1.15); }
 }
 
-/* падающие сердечки */
 .falling-heart {
     position: absolute;
     color: rgba(255,0,0,0.6);
@@ -100,8 +101,8 @@ input {
 }
 
 @keyframes fall {
-    0% { transform: translateY(-10vh); opacity: 1; }
-    100% { transform: translateY(110vh); opacity: 0; }
+    0% { transform: translateY(-10vh); }
+    100% { transform: translateY(110vh); }
 }
 </style>
 </head>
@@ -112,7 +113,10 @@ input {
 <button onclick="startLove()">Нажми 💖</button>
 
 <div id="heart" class="heart">
-    <div id="loveText" class="text"></div>
+    <div class="text">
+        <div id="loveText" class="main-text"></div>
+        <div class="sub-text">от твоего любимого Владика 💖</div>
+    </div>
 </div>
 
 <audio id="music" loop>
@@ -129,12 +133,12 @@ function startLove() {
     const heart = document.getElementById("heart");
     const text = document.getElementById("loveText");
 
-    text.innerHTML = "Я тебя люблю, " + name + " ❤️";
+    text.innerHTML = "Я тебя люблю,<br>" + name + " ❤️";
+
     heart.classList.add("show");
 
     document.getElementById("music").play();
 
-    // запускаем сердечки
     setInterval(createHeart, 300);
 }
 
