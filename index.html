@@ -11,10 +11,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    background: black;
     overflow: hidden;
     font-family: Arial, sans-serif;
     flex-direction: column;
+    color: white;
+}
+
+/* стартовый экран */
+#intro {
+    text-align: center;
+    animation: fadeIn 2s;
+}
+
+#intro p {
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 button {
@@ -27,15 +39,7 @@ button {
     cursor: pointer;
 }
 
-input {
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    border: none;
-    text-align: center;
-}
-
+/* сердце */
 .heart {
     position: relative;
     width: 260px;
@@ -64,7 +68,6 @@ input {
     text-align: center;
     transform: rotate(45deg);
     top: 70px;
-    left: 0;
     color: white;
 }
 
@@ -77,9 +80,9 @@ input {
 .sub-text {
     margin-top: 10px;
     font-size: 14px;
-    opacity: 0.9;
 }
 
+/* анимации */
 .show {
     display: block;
     animation: appear 1.5s forwards, beat 1s 1.5s infinite;
@@ -94,9 +97,15 @@ input {
     50% { transform: rotate(-45deg) scale(1.15); }
 }
 
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* падающие сердца */
 .falling-heart {
     position: absolute;
-    color: rgba(255,0,0,0.6);
+    color: rgba(255,0,0,0.7);
     animation: fall linear infinite;
 }
 
@@ -109,9 +118,13 @@ input {
 
 <body>
 
-<input id="nameInput" placeholder="Введи имя ❤️">
-<button onclick="startLove()">Нажми 💖</button>
+<!-- первый экран -->
+<div id="intro">
+    <p>У меня для тебя кое-что есть… 💌</p>
+    <button onclick="showLove()">Нажми</button>
+</div>
 
+<!-- сердце -->
 <div id="heart" class="heart">
     <div class="text">
         <div id="loveText" class="main-text"></div>
@@ -124,16 +137,14 @@ input {
 </audio>
 
 <script>
-function startLove() {
-    let name = document.getElementById("nameInput").value || "Яника";
-
-    document.querySelector("button").style.display = "none";
-    document.getElementById("nameInput").style.display = "none";
+function showLove() {
+    document.getElementById("intro").style.display = "none";
+    document.body.style.background = "linear-gradient(135deg, #ff9a9e, #fad0c4)";
 
     const heart = document.getElementById("heart");
     const text = document.getElementById("loveText");
 
-    text.innerHTML = "Я тебя люблю,<br>" + name + " ❤️";
+    text.innerHTML = "Я тебя люблю,<br>Яника ❤️";
 
     heart.classList.add("show");
 
