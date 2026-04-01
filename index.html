@@ -47,6 +47,7 @@ button {
     background: red;
     transform: rotate(-45deg) scale(0);
     display: none;
+    border-radius: 15px; /* мягкие края */
 }
 
 .heart::before,
@@ -62,17 +63,19 @@ button {
 .heart::before { top: -130px; }
 .heart::after { left: 130px; }
 
-.text {
+/* контейнер для текста */
+.text-container {
     position: absolute;
-    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* центрирование без искажений */
     text-align: center;
-    transform: rotate(45deg);
-    top: 70px;
     color: white;
+    width: 180px; /* ширина текста внутри сердца */
 }
 
 .main-text {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
     line-height: 1.4;
 }
@@ -80,6 +83,7 @@ button {
 .sub-text {
     margin-top: 10px;
     font-size: 14px;
+    opacity: 0.9;
 }
 
 /* анимации */
@@ -118,7 +122,7 @@ button {
 
 <body>
 
-<!-- первый экран -->
+<!-- стартовый экран -->
 <div id="intro">
     <p>У меня для тебя кое-что есть… 💌</p>
     <button onclick="showLove()">Нажми</button>
@@ -126,7 +130,7 @@ button {
 
 <!-- сердце -->
 <div id="heart" class="heart">
-    <div class="text">
+    <div class="text-container">
         <div id="loveText" class="main-text"></div>
         <div class="sub-text">от твоего любимого Владика 💖</div>
     </div>
