@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Любовное послание для Яники</title>
-
 <style>
 body {
     margin: 0;
@@ -40,14 +39,22 @@ button {
 }
 
 /* сердце */
-.heart {
+.heart-wrapper {
     position: relative;
     width: 260px;
     height: 240px;
+    display: none;
+}
+
+.heart {
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background: red;
     transform: rotate(-45deg) scale(0);
-    display: none;
-    border-radius: 15px; /* мягкие края */
+    border-radius: 15px;
+    top: 0;
+    left: 0;
 }
 
 .heart::before,
@@ -63,15 +70,15 @@ button {
 .heart::before { top: -130px; }
 .heart::after { left: 130px; }
 
-/* контейнер для текста */
+/* текст поверх сердца */
 .text-container {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* центрирование без искажений */
+    transform: translate(-50%, -50%);
+    width: 220px;
     text-align: center;
     color: white;
-    width: 180px; /* ширина текста внутри сердца */
 }
 
 .main-text {
@@ -87,7 +94,7 @@ button {
 }
 
 /* анимации */
-.show {
+.show-heart {
     display: block;
     animation: appear 1.5s forwards, beat 1s 1.5s infinite;
 }
@@ -119,7 +126,6 @@ button {
 }
 </style>
 </head>
-
 <body>
 
 <!-- стартовый экран -->
@@ -128,8 +134,9 @@ button {
     <button onclick="showLove()">Нажми</button>
 </div>
 
-<!-- сердце -->
-<div id="heart" class="heart">
+<!-- сердце с текстом -->
+<div class="heart-wrapper" id="heartWrapper">
+    <div class="heart" id="heart"></div>
     <div class="text-container">
         <div id="loveText" class="main-text"></div>
         <div class="sub-text">от твоего любимого Владика 💖</div>
@@ -145,12 +152,14 @@ function showLove() {
     document.getElementById("intro").style.display = "none";
     document.body.style.background = "linear-gradient(135deg, #ff9a9e, #fad0c4)";
 
+    const heartWrapper = document.getElementById("heartWrapper");
     const heart = document.getElementById("heart");
     const text = document.getElementById("loveText");
 
     text.innerHTML = "Я тебя люблю,<br>Яника ❤️";
 
-    heart.classList.add("show");
+    heartWrapper.style.display = "block";
+    heart.classList.add("show-heart");
 
     document.getElementById("music").play();
 
